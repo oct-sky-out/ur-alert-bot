@@ -1,0 +1,24 @@
+{
+  "name": "ur-alert-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UR housing alert bot with Playwright, TypeScript, JSON state, ntfy, and GitHub Actions scheduling.",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc --noEmit -p tsconfig.json",
+    "start": "tsx src/index.ts",
+    "alert:run": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "playwright": "^1.53.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+.DS_Store
+
+# Runtime secrets or local overrides
+.env
+.env.*
+
+# Keep state directories in git, but allow generated JSON files to be managed explicitly
+state/**/*.log

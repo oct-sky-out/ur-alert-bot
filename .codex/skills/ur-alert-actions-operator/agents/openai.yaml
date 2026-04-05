@@ -1,0 +1,4 @@
+interface:
+  display_name: "UR Alert Actions Operator"
+  short_description: "Maintain workflow schedule, retention, and repo state."
+  default_prompt: "Use $ur-alert-actions-operator to update GitHub Actions and state retention behavior for this repository."

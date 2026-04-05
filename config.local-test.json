@@ -1,0 +1,29 @@
+{
+  "timezone": "Asia/Tokyo",
+  "scheduleTimes": [
+    "09:00",
+    "13:00",
+    "17:00"
+  ],
+  "language": "ko",
+  "priceMode": "rent_plus_fee",
+  "maxPriceYen": 250000,
+  "ntfy": {
+    "serverUrl": "https://ntfy.sh",
+    "topic": ""
+  },
+  "targets": [
+    {
+      "id": "tokyo-20-6870",
+      "label": "プロムナード荻窪",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7130",
+      "label": "シャレール荻窪",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7130.html",
+      "enabled": true
+    }
+  ]
+}

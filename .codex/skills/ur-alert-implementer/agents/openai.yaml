@@ -1,0 +1,4 @@
+interface:
+  display_name: "UR Alert Implementer"
+  short_description: "Build crawler, matcher, state, and ntfy flow."
+  default_prompt: "Use $ur-alert-implementer to implement or refactor the UR alert bot in this repository."

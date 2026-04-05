@@ -1,0 +1,24 @@
+{
+  "runAt": "2026-04-05T19:56:58+09:00",
+  "priceMode": "rent_only",
+  "maxPriceYen": 80000,
+  "language": "ko",
+  "matchedIds": [],
+  "results": [
+    {
+      "id": "ur-001",
+      "targetId": "ur-001",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/sp/xxxx_room.html",
+      "url": "https://www.ur-net.go.jp/chintai/sp/xxxx_room.html",
+      "title": "후보 A",
+      "rentYen": 0,
+      "feeYen": 0,
+      "totalPriceYen": 0,
+      "isAvailable": false,
+      "isMatched": false,
+      "checkedAt": "2026-04-05T19:56:58+09:00",
+      "parseStatus": "parse_failed",
+      "parseMessage": "HTTP 404 while opening the room detail page."
+    }
+  ]
+}

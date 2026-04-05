@@ -1,0 +1,4 @@
+interface:
+  display_name: "UR Alert Reviewer"
+  short_description: "Validate alerts, gone logic, and retention rules."
+  default_prompt: "Use $ur-alert-reviewer to review or test the UR alert bot behavior in this repository."
