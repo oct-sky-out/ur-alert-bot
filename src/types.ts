@@ -23,7 +23,12 @@ export interface AppConfig {
   targets: TargetConfig[];
 }
 
-export interface CrawlResult {
+export interface ContactInfo {
+  contactName?: string;
+  contactPhone?: string;
+}
+
+export interface CrawlResult extends ContactInfo {
   id: string;
   targetId: string;
   targetUrl: string;

@@ -1,7 +1,7 @@
 import { computeIsMatched } from "./matcher.js";
-import type { AppConfig, CrawlResult, TargetConfig } from "./types.js";
+import type { AppConfig, ContactInfo, CrawlResult, TargetConfig } from "./types.js";
 
-export interface BuildingPageMetadata {
+export interface BuildingPageMetadata extends ContactInfo {
   buildingName: string;
   shisya: string;
   danchi: string;
@@ -62,12 +62,15 @@ export function parseBuildingPageMetadata(
     target.label ||
     cleanTitle(decodeHtmlEntities(titleMatch?.[1])) ||
     target.id;
+  const contactInfo = parseContactInfoFromHtml(html);
 
   return {
     buildingName,
     shisya: initSearchMatch?.[1] ?? fallback?.shisya ?? "",
     danchi: initSearchMatch?.[2] ?? fallback?.danchi ?? "",
     shikibetu: initSearchMatch?.[3] ?? fallback?.shikibetu ?? "",
+    contactName: contactInfo.contactName,
+    contactPhone: contactInfo.contactPhone,
   };
 }
 
@@ -121,6 +124,8 @@ export function parseBuildingRoomResults(
       title: `${metadata.buildingName} ${roomName}`.trim(),
       buildingName: metadata.buildingName,
       roomId,
+      contactName: metadata.contactName,
+      contactPhone: metadata.contactPhone,
       rentYen,
       feeYen,
       totalPriceYen,
@@ -140,6 +145,7 @@ export function parseRoomResultFromApi(
   target: TargetConfig,
   config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
   checkedAt: string,
+  contactInfo: ContactInfo = {},
 ): CrawlResult {
   if (!record) {
     return buildParseFailureResult(
@@ -185,6 +191,8 @@ export function parseRoomResultFromApi(
     url: target.url,
     title,
     roomId,
+    contactName: contactInfo.contactName,
+    contactPhone: contactInfo.contactPhone,
     rentYen,
     feeYen: feeYen ?? 0,
     totalPriceYen,
@@ -201,6 +209,7 @@ export function parseRoomResultFromDom(
   target: TargetConfig,
   config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
   checkedAt: string,
+  contactInfo: ContactInfo = {},
 ): CrawlResult {
   const bodyText = cleanText(dom.bodyText);
 
@@ -251,6 +260,8 @@ export function parseRoomResultFromDom(
     url: target.url,
     title,
     roomId,
+    contactName: contactInfo.contactName,
+    contactPhone: contactInfo.contactPhone,
     rentYen,
     feeYen: feeYen ?? 0,
     totalPriceYen,
@@ -259,6 +270,16 @@ export function parseRoomResultFromDom(
     checkedAt,
     parseStatus: "ok",
     parseMessage: cleanText(dom.availableDateText) || undefined,
+  };
+}
+
+export function parseContactInfoFromHtml(html: string): ContactInfo {
+  const contactName = extractPrimaryContactName(html);
+  const contactPhone = extractPrimaryContactPhone(html);
+
+  return {
+    contactName: contactName || undefined,
+    contactPhone: contactPhone || undefined,
   };
 }
 
@@ -356,9 +377,55 @@ function decodeHtmlEntities(raw: string | undefined): string {
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"');
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, " ");
 }
 
 function cleanText(value: string | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
+}
+
+function extractPrimaryContactName(html: string): string | null {
+  const noteMatch = html.match(/<div class="contactblock_item_note">([\s\S]*?)<\/div>/i);
+
+  if (!noteMatch) {
+    return null;
+  }
+
+  const noteText = decodeHtmlEntities(noteMatch[1])
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, " ");
+  const firstLine = noteText
+    .split("\n")
+    .map((line) => cleanText(line))
+    .find(Boolean);
+
+  return firstLine || null;
+}
+
+function extractPrimaryContactPhone(html: string): string | null {
+  const patterns = [
+    /button_contact--tel[\s\S]*?<span>[\s\S]*?<br>\s*([0-9０-９]{2,4}[-－][0-9０-９]{2,4}[-－][0-9０-９]{3,4})\s*<\/span>/i,
+    /class="item_tel_number">\s*([0-9０-９]{2,4}[-－][0-9０-９]{2,4}[-－][0-9０-９]{3,4})\s*<\/span>/i,
+    /class="item_tel">\s*([0-9０-９]{2,4}[-－][0-9０-９]{2,4}[-－][0-9０-９]{3,4})\s*<\/strong>/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    const phone = normalizePhone(match?.[1]);
+
+    if (phone) {
+      return phone;
+    }
+  }
+
+  return null;
+}
+
+function normalizePhone(value: string | undefined): string {
+  const text = cleanText(value)
+    .replace(/[０-９]/g, (digit) => String(digit.charCodeAt(0) - 0xff10))
+    .replace(/－/g, "-");
+
+  return /^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/.test(text) ? text : "";
 }

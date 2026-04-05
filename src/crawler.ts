@@ -2,6 +2,7 @@ import { chromium, type Page } from "playwright";
 
 import {
   parseBuildingPageMetadata,
+  parseContactInfoFromHtml,
   parseBuildingRoomResults,
   parseRoomResultFromApi,
   parseRoomResultFromDom,
@@ -68,7 +69,7 @@ async function crawlBuildingTarget(
     const response = await fetch(target.url);
 
     if (!response.ok) {
-      return [buildFailureResult(target, checkedAt, `HTTP ${response.status()} while opening the building page.`)];
+      return [buildFailureResult(target, checkedAt, `HTTP ${response.status} while opening the building page.`)];
     }
 
     const html = await response.text();
@@ -201,6 +202,8 @@ async function crawlRoomDetailTarget(
   }
 
   await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => undefined);
+  const html = await page.content();
+  const contactInfo = parseContactInfoFromHtml(html);
 
   const apiPayload = await apiPayloadPromise;
 
@@ -210,12 +213,13 @@ async function crawlRoomDetailTarget(
       target,
       config,
       checkedAt,
+      contactInfo,
     );
   }
 
   const dom = await readRoomDom(page);
 
-  return parseRoomResultFromDom(dom, target, config, checkedAt);
+  return parseRoomResultFromDom(dom, target, config, checkedAt, contactInfo);
 }
 
 async function readRoomDom(page: Page) {

@@ -98,6 +98,8 @@ NTFY_TOPIC=minsuk-ur-alert-2026 CONFIG_PATH=config.local-test.json npm run alert
 - 각 실행 시점에는 현재 조건을 만족하는 물건을 모두 알린다.
 - 직전 실행에는 있었지만 이번 실행에는 없는 물건은 `사라짐 알림`을 보낸다.
 - 같은 날 이미 `사라짐 알림`을 보낸 물건은 그날 다시 사라짐 알림을 보내지 않는다.
+- 알림 본문은 `ntfy` Markdown 형식으로 전송한다.
+- 대표 문의 전화번호가 있으면 알림에 함께 포함한다.
 
 ## 예시 동작
 
@@ -171,6 +173,8 @@ NTFY_TOPIC=minsuk-ur-alert-2026 CONFIG_PATH=config.local-test.json npm run alert
   "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870.html",
   "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870_room.html?JKSS=000030806",
   "title": "プロムナード荻窪 3号棟806号室",
+  "contactName": "UR賃貸ショップ千歳烏山",
+  "contactPhone": "03-6279-6672",
   "rentYen": 229200,
   "feeYen": 10500,
   "totalPriceYen": 239700,
@@ -292,15 +296,17 @@ on:
 - 금액 문자열은 숫자 비교 전에 반드시 정규화한다.
 - `disabled` target은 비교 대상에서 제외한다.
 - 알림 메시지는 `config.language`에 따라 `ko` 또는 `ja`로만 생성한다.
+- 알림 메시지는 `ntfy` Markdown 렌더링을 전제로 구성한다.
 - 알림 메시지에는 최소 아래 정보를 포함한다.
   - 물건명
   - 월세
   - 공익비
   - 합계
-  - 현재 판정
+  - 대표 문의 전화번호
   - URL
 - 사라짐 알림에는 최소 아래 정보를 포함한다.
   - 물건명
+  - 대표 문의 전화번호
   - URL
   - `이번 회차 기준 조건 미충족`
 
@@ -310,6 +316,7 @@ on:
 - `language: "ja"` 이면 알림 제목과 본문을 일본어로 생성한다.
 - 지원 언어 외 값은 설정 검증 단계에서 실패 처리한다.
 - 현재 매칭 알림과 사라짐 알림 모두 같은 언어 설정을 따른다.
+- 전화번호가 확인되면 같은 언어 문구 안에 함께 표시한다.
 
 ## 에이전트용 Skills
 
