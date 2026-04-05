@@ -80,6 +80,7 @@ UR 단지 페이지 URL을 주기적으로 확인해서, 원하는 금액 조건
 - `language`
 - `priceMode`
 - `maxPriceYen`
+- `discountFilter`
 - `targets`
 
 예시:
@@ -91,6 +92,10 @@ UR 단지 페이지 URL을 주기적으로 확인해서, 원하는 금액 조건
   "language": "ko",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 250000,
+  "discountFilter": {
+    "mode": "ignore",
+    "systems": []
+  },
   "ntfy": {
     "serverUrl": "https://ntfy.sh",
     "topic": ""
@@ -151,7 +156,12 @@ on:
 - 한 단지에서 여러 공실이 있으면 각각 개별 결과로 판단합니다.
 - `priceMode = rent_only` 이면 `월세`만 비교합니다.
 - `priceMode = rent_plus_fee` 이면 `월세 + 공익비`를 비교합니다.
-- 현재 공실이 있고 계산된 금액이 `maxPriceYen` 이하이면 알림 대상입니다.
+- `discountFilter.mode = ignore` 이면 할인 제도를 매칭 조건에 사용하지 않습니다.
+- `discountFilter.mode = include` 이면 `systems`에 지정한 할인 제도 중 하나 이상이 있는 물건만 포함합니다.
+- `discountFilter.mode = exclude` 이면 `systems`에 지정한 할인 제도가 붙은 물건을 제외합니다.
+- 지원 할인 제도는 `近居割`, `U35割`, `すくすく割`, `子育て割` 입니다.
+- 현재 공실이 있고 계산된 금액이 `maxPriceYen` 이하이며 할인 조건까지 만족하면 알림 대상입니다.
+- 할인 제도 물건 중 `할인 적용 후 금액 문의 필요` 형태로 내려오는 경우, 알림에는 `월세(할인 적용 전)`과 `합계(할인 적용 전)`로 표기합니다.
 - 조회는 한 번에 전부 처리하지 않고 `50개씩` 나누어 처리합니다.
 - 청크 사이에는 `30초` 대기합니다.
 
@@ -187,6 +197,9 @@ on:
   - `rent_plus_fee`
 - `maxPriceYen`
   - 최대 허용 금액
+- `discountFilter`
+  - `mode`: `ignore` | `include` | `exclude`
+  - `systems`: `近居割`, `U35割`, `すくすく割`, `子育て割`
 - `targets`
   - 감시 대상 단지 URL 목록
 

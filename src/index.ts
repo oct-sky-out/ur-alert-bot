@@ -48,6 +48,7 @@ export async function main(): Promise<void> {
     runAt: runContext.runAtIso,
     priceMode: config.priceMode,
     maxPriceYen: config.maxPriceYen,
+    discountFilter: config.discountFilter,
     language: config.language,
     matchedIds,
     results,

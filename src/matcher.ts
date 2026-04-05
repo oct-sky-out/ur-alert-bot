@@ -1,18 +1,41 @@
 import type { AppConfig, CrawlResult, MatchDiff, SnapshotState } from "./types.js";
 
 export function computeIsMatched(
-  result: Pick<CrawlResult, "rentYen" | "feeYen" | "totalPriceYen" | "isAvailable">,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  result: Pick<CrawlResult, "rentYen" | "feeYen" | "totalPriceYen" | "isAvailable" | "discountSystems">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
 ): boolean {
   if (!result.isAvailable) {
     return false;
   }
 
-  if (config.priceMode === "rent_only") {
-    return result.rentYen <= config.maxPriceYen;
+  const isPriceMatched =
+    config.priceMode === "rent_only"
+      ? result.rentYen <= config.maxPriceYen
+      : result.totalPriceYen <= config.maxPriceYen;
+
+  if (!isPriceMatched) {
+    return false;
   }
 
-  return result.totalPriceYen <= config.maxPriceYen;
+  return matchesDiscountFilter(result.discountSystems, config.discountFilter);
+}
+
+function matchesDiscountFilter(
+  discountSystems: CrawlResult["discountSystems"],
+  filter: Pick<AppConfig, "discountFilter">["discountFilter"],
+): boolean {
+  if (filter.mode === "ignore" || filter.systems.length === 0) {
+    return true;
+  }
+
+  const selectedSystems = new Set(filter.systems);
+  const hasSelectedSystem = discountSystems.some((system) => selectedSystems.has(system));
+
+  if (filter.mode === "include") {
+    return hasSelectedSystem;
+  }
+
+  return !hasSelectedSystem;
 }
 
 export function collectMatchedIds(results: CrawlResult[]): string[] {

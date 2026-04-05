@@ -8,6 +8,10 @@
   "language": "ko",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 250000,
+  "discountFilter": {
+    "mode": "ignore",
+    "systems": []
+  },
   "ntfy": {
     "serverUrl": "https://ntfy.sh",
     "topic": ""

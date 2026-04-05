@@ -21,7 +21,7 @@ const BUILDING_ROOM_API_URL =
   "https://chintai.r6.ur-net.go.jp/chintai/api/bukken/detail/detail_bukken_room/";
 
 export async function crawlTargets(
-  config: Pick<AppConfig, "targets" | "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "targets" | "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
 ): Promise<CrawlResult[]> {
   const enabledTargets = config.targets.filter((item) => item.enabled);
@@ -48,7 +48,7 @@ export async function crawlTargets(
 
 async function crawlTargetChunk(
   targets: TargetConfig[],
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
 ): Promise<CrawlResult[]> {
   const buildingTargets = targets.filter((item) => !isRoomDetailUrl(item.url));
@@ -91,7 +91,7 @@ async function crawlTargetChunk(
 
 async function crawlBuildingTarget(
   target: TargetConfig,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
 ): Promise<CrawlResult[]> {
   try {
@@ -224,7 +224,7 @@ async function fetchBuildingRoomPage(
 async function crawlRoomDetailTarget(
   page: Page,
   target: TargetConfig,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
 ): Promise<CrawlResult> {
   const apiPayloadPromise = page
@@ -249,6 +249,9 @@ async function crawlRoomDetailTarget(
       targetUrl: target.url,
       url: target.url,
       title: target.label || target.id,
+      discountSystems: [],
+      rentBasis: "listed_rent",
+      priceInquiryRequired: false,
       rentYen: 0,
       feeYen: 0,
       totalPriceYen: 0,
@@ -314,6 +317,9 @@ function buildFailureResult(
     targetUrl: target.url,
     url: target.url,
     title: target.label || target.id,
+    discountSystems: [],
+    rentBasis: "listed_rent",
+    priceInquiryRequired: false,
     rentYen: 0,
     feeYen: 0,
     totalPriceYen: 0,

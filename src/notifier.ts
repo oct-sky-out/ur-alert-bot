@@ -16,11 +16,13 @@ const copy = {
     currentBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatDiscountLine("ko", item),
+        formatPriceGuidanceLine("ko", item),
         formatContactNameLine("ko", item),
         formatContactPhoneLine("ko", item),
-        `  - 월세: ${formatYen(item.rentYen)}엔`,
+        formatRentLine("ko", item),
         `  - 공익비: ${formatYen(item.feeYen)}엔`,
-        `  - 합계: ${formatYen(item.totalPriceYen)}엔`,
+        formatTotalLine("ko", item),
         `  - [상세 보기](${item.url})`,
       ]
         .filter(Boolean)
@@ -28,6 +30,8 @@ const copy = {
     goneBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatDiscountLine("ko", item),
+        formatPriceGuidanceLine("ko", item),
         formatContactNameLine("ko", item),
         formatContactPhoneLine("ko", item),
         "  - 상태: 이번 회차 기준 조건 미충족",
@@ -43,11 +47,13 @@ const copy = {
     currentBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatDiscountLine("ja", item),
+        formatPriceGuidanceLine("ja", item),
         formatContactNameLine("ja", item),
         formatContactPhoneLine("ja", item),
-        `  - 家賃: ${formatYen(item.rentYen)}円`,
+        formatRentLine("ja", item),
         `  - 共益費: ${formatYen(item.feeYen)}円`,
-        `  - 合計: ${formatYen(item.totalPriceYen)}円`,
+        formatTotalLine("ja", item),
         `  - [詳細を見る](${item.url})`,
       ]
         .filter(Boolean)
@@ -55,6 +61,8 @@ const copy = {
     goneBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatDiscountLine("ja", item),
+        formatPriceGuidanceLine("ja", item),
         formatContactNameLine("ja", item),
         formatContactPhoneLine("ja", item),
         "  - 状態: 今回実行時点で条件未達",
@@ -193,6 +201,58 @@ function formatContactNameLine(language: Language, item: CrawlResult): string {
   }
 
   return `  - 問い合わせ先: ${name}`;
+}
+
+function formatDiscountLine(language: Language, item: CrawlResult): string {
+  if (item.discountSystems.length === 0) {
+    return "";
+  }
+
+  const value = item.discountSystems.map(escapeMarkdown).join(", ");
+
+  if (language === "ko") {
+    return `  - 할인 제도: ${value}`;
+  }
+
+  return `  - 割引制度: ${value}`;
+}
+
+function formatPriceGuidanceLine(language: Language, item: CrawlResult): string {
+  if (!item.priceInquiryRequired) {
+    return "";
+  }
+
+  if (language === "ko") {
+    return "  - 금액 안내: 할인 적용 후 월세는 문의 필요";
+  }
+
+  return "  - 金額案内: 割引適用後の家賃は要問い合わせ";
+}
+
+function formatRentLine(language: Language, item: CrawlResult): string {
+  const label =
+    item.rentBasis === "discount_pre_rent"
+      ? language === "ko"
+        ? "월세(할인 적용 전)"
+        : "家賃(割引適用前)"
+      : language === "ko"
+        ? "월세"
+        : "家賃";
+
+  return `  - ${label}: ${formatYen(item.rentYen)}${language === "ko" ? "엔" : "円"}`;
+}
+
+function formatTotalLine(language: Language, item: CrawlResult): string {
+  const label =
+    item.rentBasis === "discount_pre_rent"
+      ? language === "ko"
+        ? "합계(할인 적용 전)"
+        : "合計(割引適用前)"
+      : language === "ko"
+        ? "합계"
+        : "合計";
+
+  return `  - ${label}: ${formatYen(item.totalPriceYen)}${language === "ko" ? "엔" : "円"}`;
 }
 
 function formatContactPhoneLine(language: Language, item: CrawlResult): string {

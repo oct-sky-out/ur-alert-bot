@@ -113,6 +113,7 @@ state/
 - `runAt`
 - `priceMode`
 - `maxPriceYen`
+- `discountFilter`
 - `language`
 - `matchedIds`
 - `results`
@@ -149,6 +150,7 @@ state/
 - `roomId`
 - `contactName`
 - `contactPhone`
+- `discountSystems`
 - `rentYen`
 - `feeYen`
 - `totalPriceYen`
@@ -168,6 +170,8 @@ state/
 - gone은 하루 1회만 알림
 - 언어는 `ko` 또는 `ja`
 - 전화번호가 있으면 본문에 포함
+- 할인 필터는 `ignore/include/exclude`와 4개 할인 제도(`近居割`, `U35割`, `すくすく割`, `子育て割`)만 지원
+- 할인 적용 후 금액이 숨겨진 방은 `rentBasis=discount_pre_rent`, `priceInquiryRequired=true`로 저장하고 알림에는 할인 적용 전 금액으로 표시
 
 ### 조회 규칙
 

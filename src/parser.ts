@@ -1,5 +1,12 @@
 import { computeIsMatched } from "./matcher.js";
-import type { AppConfig, ContactInfo, CrawlResult, TargetConfig } from "./types.js";
+import {
+  SUPPORTED_DISCOUNT_SYSTEMS,
+  type AppConfig,
+  type ContactInfo,
+  type CrawlResult,
+  type DiscountSystem,
+  type TargetConfig,
+} from "./types.js";
 
 export interface BuildingPageMetadata extends ContactInfo {
   buildingName: string;
@@ -17,11 +24,20 @@ export interface BuildingRoomApiRecord {
   roomDetailLink?: string;
   roomDetailLinkSp?: string;
   rent?: string;
+  rent_sp?: string;
+  rent_normal?: string;
+  rent_normal_css?: string;
   commonfee?: string;
   commonfee_sp?: string;
+  requirement?: string;
+  system?: BuildingRoomSystemRecord[];
   type?: string;
   floor?: string;
   floorspace?: string;
+}
+
+export interface BuildingRoomSystemRecord {
+  制度名?: string;
 }
 
 export interface RoomApiRecord {
@@ -29,6 +45,7 @@ export interface RoomApiRecord {
   roomNm?: string;
   rent?: string;
   rent_sp?: string;
+  system?: BuildingRoomSystemRecord[];
   commonfee?: string;
   commonfee_sp?: string;
   availableDate?: string;
@@ -90,7 +107,7 @@ export function parseBuildingRoomResults(
   records: BuildingRoomApiRecord[] | null,
   metadata: BuildingPageMetadata,
   target: TargetConfig,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
 ): CrawlResult[] {
   if (records === null) {
@@ -104,8 +121,19 @@ export function parseBuildingRoomResults(
       extractJkss(record.roomDetailLinkSp) ||
       `room-${index + 1}`;
     const roomName = cleanText(record.name) || roomId;
-    const rentYen = parseYen(record.rent);
+    const rentText =
+      cleanText(record.rent_sp) ||
+      cleanText(record.rent) ||
+      cleanText(record.rent_normal);
+    const rentYen = parseYen(rentText);
     const feeYen = parseYen(record.commonfee_sp) ?? parseYen(record.commonfee) ?? 0;
+    const systemLabels = extractSystemLabels(record.system);
+    const discountSystems = filterSupportedDiscountSystems(systemLabels);
+    const isDiscountPreRent =
+      discountSystems.length > 0 &&
+      !cleanText(record.rent_sp) &&
+      !cleanText(record.rent) &&
+      Boolean(cleanText(record.rent_normal));
 
     if (rentYen === null) {
       return buildParseFailureResult(
@@ -116,8 +144,11 @@ export function parseBuildingRoomResults(
         `${target.id}:${roomId}`,
         [
           "source=detail_bukken_room",
+          `rawRentSp=${cleanText(record.rent_sp) || "missing"}`,
           `rawRent=${cleanText(record.rent) || "missing"}`,
+          `rawRentNormal=${cleanText(record.rent_normal) || "missing"}`,
           `rawCommonFee=${cleanText(record.commonfee_sp) || cleanText(record.commonfee) || "missing"}`,
+          `systems=${systemLabels.join(",") || "missing"}`,
         ],
       );
     }
@@ -129,6 +160,7 @@ export function parseBuildingRoomResults(
         feeYen,
         totalPriceYen,
         isAvailable: true,
+        discountSystems,
       },
       config,
     );
@@ -141,6 +173,9 @@ export function parseBuildingRoomResults(
       title: `${metadata.buildingName} ${roomName}`.trim(),
       buildingName: metadata.buildingName,
       roomId,
+      discountSystems,
+      rentBasis: isDiscountPreRent ? "discount_pre_rent" : "listed_rent",
+      priceInquiryRequired: isDiscountPreRent,
       contactName: metadata.contactName,
       contactPhone: metadata.contactPhone,
       rentYen,
@@ -150,7 +185,7 @@ export function parseBuildingRoomResults(
       isMatched,
       checkedAt,
       parseStatus: "ok",
-      parseMessage: [cleanText(record.type), cleanText(record.floor)]
+      parseMessage: [cleanText(record.type), cleanText(record.floor), ...systemLabels]
         .filter(Boolean)
         .join(" | ") || undefined,
     };
@@ -160,7 +195,7 @@ export function parseBuildingRoomResults(
 export function parseRoomResultFromApi(
   record: RoomApiRecord | null,
   target: TargetConfig,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
   contactInfo: ContactInfo = {},
 ): CrawlResult {
@@ -180,10 +215,16 @@ export function parseRoomResultFromApi(
 
   const title = cleanText(record.roomNm) || target.label || target.id;
   const roomId = cleanText(record.id) || extractJkss(target.url) || target.id;
-  const rentText = cleanText(record.rent_sp) || cleanText(record.rent);
+  const rentHtml = record.rent_sp ?? record.rent;
+  const rentText = cleanText(stripHtml(rentHtml));
   const commonFeeText = cleanText(record.commonfee_sp) || cleanText(record.commonfee);
-  const rentYen = parseYen(rentText);
+  const rentYen = extractFirstYen(rentHtml) ?? parseYen(rentText);
   const feeYen = parseYen(commonFeeText);
+  const systemLabels = extractSystemLabels(record.system);
+  const discountSystems = filterSupportedDiscountSystems(systemLabels);
+  const isDiscountPreRent =
+    discountSystems.length > 0 &&
+    indicatesDiscountInquiryRequired(rentHtml);
 
   if (rentYen === null) {
     return buildParseFailureResult(
@@ -196,6 +237,7 @@ export function parseRoomResultFromApi(
         "source=detail_room_api",
         `rawRent=${rentText || "missing"}`,
         `rawCommonFee=${commonFeeText || "missing"}`,
+        `systems=${systemLabels.join(",") || "missing"}`,
       ],
     );
   }
@@ -204,13 +246,14 @@ export function parseRoomResultFromApi(
   const isAvailable = Boolean(cleanText(record.id));
   const isMatched = computeIsMatched(
     {
-      rentYen,
-      feeYen: feeYen ?? 0,
-      totalPriceYen,
-      isAvailable,
-    },
-    config,
-  );
+        rentYen,
+        feeYen: feeYen ?? 0,
+        totalPriceYen,
+        isAvailable,
+        discountSystems,
+      },
+      config,
+    );
 
   return {
     id: `${target.id}:${roomId}`,
@@ -219,6 +262,9 @@ export function parseRoomResultFromApi(
     url: target.url,
     title,
     roomId,
+    discountSystems,
+    rentBasis: isDiscountPreRent ? "discount_pre_rent" : "listed_rent",
+    priceInquiryRequired: isDiscountPreRent,
     contactName: contactInfo.contactName,
     contactPhone: contactInfo.contactPhone,
     rentYen,
@@ -235,7 +281,7 @@ export function parseRoomResultFromApi(
 export function parseRoomResultFromDom(
   dom: RoomDomSnapshot,
   target: TargetConfig,
-  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen" | "discountFilter">,
   checkedAt: string,
   contactInfo: ContactInfo = {},
 ): CrawlResult {
@@ -285,13 +331,14 @@ export function parseRoomResultFromDom(
   const isAvailable = true;
   const isMatched = computeIsMatched(
     {
-      rentYen,
-      feeYen: feeYen ?? 0,
-      totalPriceYen,
-      isAvailable,
-    },
-    config,
-  );
+        rentYen,
+        feeYen: feeYen ?? 0,
+        totalPriceYen,
+        isAvailable,
+        discountSystems: [],
+      },
+      config,
+    );
 
   return {
     id: `${target.id}:${roomId}`,
@@ -300,6 +347,9 @@ export function parseRoomResultFromDom(
     url: target.url,
     title,
     roomId,
+    discountSystems: [],
+    rentBasis: "listed_rent",
+    priceInquiryRequired: false,
     contactName: contactInfo.contactName,
     contactPhone: contactInfo.contactPhone,
     rentYen,
@@ -337,6 +387,9 @@ function buildParseFailureResult(
     targetUrl: target.url,
     url: target.url,
     title,
+    discountSystems: [],
+    rentBasis: "listed_rent",
+    priceInquiryRequired: false,
     rentYen: 0,
     feeYen: 0,
     totalPriceYen: 0,
@@ -369,6 +422,23 @@ function parseYen(rawText: string | undefined): number | null {
   }
 
   return Number(digits);
+}
+
+function extractFirstYen(rawText: string | undefined): number | null {
+  const text = stripHtml(rawText);
+  const manMatch = text.match(/([0-9]+(?:\.[0-9]+)?)\s*万/);
+
+  if (manMatch) {
+    return Math.round(Number(manMatch[1]) * 10000);
+  }
+
+  const yenMatch = text.match(/([0-9][0-9,]*)\s*円/);
+
+  if (!yenMatch) {
+    return null;
+  }
+
+  return Number(yenMatch[1].replace(/,/g, ""));
 }
 
 function cleanTitle(rawTitle: string | undefined): string {
@@ -423,6 +493,12 @@ function decodeHtmlEntities(raw: string | undefined): string {
     .replace(/&nbsp;/g, " ");
 }
 
+function stripHtml(raw: string | undefined): string {
+  return decodeHtmlEntities(raw)
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, " ");
+}
+
 function cleanText(value: string | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();
 }
@@ -470,4 +546,26 @@ function normalizePhone(value: string | undefined): string {
     .replace(/－/g, "-");
 
   return /^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/.test(text) ? text : "";
+}
+
+function extractSystemLabels(systems: BuildingRoomSystemRecord[] | undefined): string[] {
+  if (!Array.isArray(systems)) {
+    return [];
+  }
+
+  return systems
+    .map((system) => cleanText(system.制度名))
+    .filter(Boolean);
+}
+
+function filterSupportedDiscountSystems(systemLabels: string[]): DiscountSystem[] {
+  return systemLabels.filter((label): label is DiscountSystem =>
+    (SUPPORTED_DISCOUNT_SYSTEMS as readonly string[]).includes(label),
+  );
+}
+
+function indicatesDiscountInquiryRequired(rawRentHtml: string | undefined): boolean {
+  const text = stripHtml(rawRentHtml);
+
+  return text.includes("割引適用") || text.includes("お問い合わせください");
 }

@@ -8,6 +8,13 @@
   "language": "ko",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 160000,
+  "discountFilter": {
+    "mode": "exclude",
+    "systems": [
+      "子育て割",
+      "すくすく割"
+    ]
+  },
   "ntfy": {
     "serverUrl": "https://ntfy.sh",
     "topic": ""

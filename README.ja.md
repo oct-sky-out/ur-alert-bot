@@ -80,6 +80,7 @@ UR団地ページのURLを定期的に確認し、希望する金額条件内の
 - `language`
 - `priceMode`
 - `maxPriceYen`
+- `discountFilter`
 - `targets`
 
 例:
@@ -91,6 +92,10 @@ UR団地ページのURLを定期的に確認し、希望する金額条件内の
   "language": "ja",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 250000,
+  "discountFilter": {
+    "mode": "ignore",
+    "systems": []
+  },
   "ntfy": {
     "serverUrl": "https://ntfy.sh",
     "topic": ""
@@ -151,7 +156,12 @@ on:
 - 1つの団地に複数の空室があれば、それぞれ個別結果として判定します。
 - `priceMode = rent_only` の場合は `家賃` のみ比較します。
 - `priceMode = rent_plus_fee` の場合は `家賃 + 共益費` を比較します。
-- 現在空室があり、計算結果が `maxPriceYen` 以下なら通知対象です。
+- `discountFilter.mode = ignore` の場合は割引制度を判定に使いません。
+- `discountFilter.mode = include` の場合は `systems` に指定した割引制度を 1 つ以上持つ物件のみ含めます。
+- `discountFilter.mode = exclude` の場合は `systems` に指定した割引制度が付いた物件を除外します。
+- 対応する割引制度は `近居割`, `U35割`, `すくすく割`, `子育て割` です。
+- 現在空室があり、計算結果が `maxPriceYen` 以下で、さらに割引条件も満たす場合に通知対象です。
+- 割引制度付き物件のうち `割引適用後の家賃は要問い合わせ` となるものは、通知本文で `家賃(割引適用前)` と `合計(割引適用前)` として表示します。
 - 取得は一度に全件処理せず、`50件ずつ` のチャンクで処理します。
 - チャンクの間には `30秒` 待機します。
 
@@ -187,6 +197,9 @@ on:
   - `rent_plus_fee`
 - `maxPriceYen`
   - 上限金額
+- `discountFilter`
+  - `mode`: `ignore` | `include` | `exclude`
+  - `systems`: `近居割`, `U35割`, `すくすく割`, `子育て割`
 - `targets`
   - 監視対象の団地 URL 一覧
 

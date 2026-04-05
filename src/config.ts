@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
 
-import type { AppConfig } from "./types.js";
+import { SUPPORTED_DISCOUNT_SYSTEMS, type AppConfig } from "./types.js";
 
 const targetSchema = z.object({
   id: z.string().trim().min(1),
@@ -22,6 +22,15 @@ const configSchema = z
     language: z.enum(["ko", "ja"]),
     priceMode: z.enum(["rent_only", "rent_plus_fee"]),
     maxPriceYen: z.number().int().nonnegative(),
+    discountFilter: z
+      .object({
+        mode: z.enum(["ignore", "include", "exclude"]).default("ignore"),
+        systems: z.array(z.enum(SUPPORTED_DISCOUNT_SYSTEMS)).default([]),
+      })
+      .default({
+        mode: "ignore",
+        systems: [],
+      }),
     ntfy: z.object({
       serverUrl: z.string().url(),
       topic: z.string().trim().optional().default(""),
