@@ -44,6 +44,16 @@ export interface CrawlResult extends ContactInfo {
   checkedAt: string;
   parseStatus: "ok" | "parse_failed";
   parseMessage?: string;
+  parseEvidence?: string[];
+}
+
+export interface RunDiagnostics {
+  totalResults: number;
+  matchedCount: number;
+  parseFailureCount: number;
+  structureChangeSuspected: boolean;
+  warnings: string[];
+  parseFailureIds: string[];
 }
 
 export interface SnapshotState {
@@ -53,6 +63,7 @@ export interface SnapshotState {
   language: Language;
   matchedIds: string[];
   results: CrawlResult[];
+  diagnostics: RunDiagnostics;
 }
 
 export interface DailyState {

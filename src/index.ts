@@ -1,5 +1,6 @@
 import { crawlTargets } from "./crawler.js";
 import { loadConfig } from "./config.js";
+import { analyzeRunDiagnostics, logRunDiagnostics } from "./diagnostics.js";
 import { buildNotifications, sendNtfyNotifications } from "./notifier.js";
 import { collectMatchedIds, diffMatches } from "./matcher.js";
 import {
@@ -29,6 +30,8 @@ export async function main(): Promise<void> {
 
   const results = await crawlTargets(config, runContext.runAtIso);
   const matchedIds = collectMatchedIds(results);
+  const diagnostics = analyzeRunDiagnostics(results, matchedIds);
+  logRunDiagnostics(runContext.runLabel, diagnostics);
   const diff = diffMatches(previousSnapshot, matchedIds, dailyState.goneReportedIds);
 
   const currentMatches = results.filter((result) => diff.currentMatchedIds.includes(result.id));
@@ -48,6 +51,7 @@ export async function main(): Promise<void> {
     language: config.language,
     matchedIds,
     results,
+    diagnostics,
   };
 
   await sendNtfyNotifications(config.ntfy.serverUrl, config.ntfy.topic, messages);

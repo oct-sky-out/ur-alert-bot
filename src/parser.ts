@@ -43,6 +43,18 @@ export interface RoomDomSnapshot {
   availableDateText: string;
 }
 
+export function inspectBuildingPageHtml(html: string, target: TargetConfig): string[] {
+  const clues = [
+    `target=${target.id}`,
+    `title=${cleanTitle(decodeHtmlEntities(html.match(/<title>([^<]+)<\/title>/i)?.[1])) || "missing"}`,
+    `hasInitSearch=${html.includes("ur.api.bukken_detail.initSearch(")}`,
+    `hasRoomApiMarker=${html.includes("detail_bukken_room")}`,
+    `hasContactBlock=${html.includes("contactblock_item_note") || html.includes("button_contact--tel")}`,
+  ];
+
+  return clues;
+}
+
 export function parseBuildingPageMetadata(
   html: string,
   target: TargetConfig,
@@ -102,6 +114,11 @@ export function parseBuildingRoomResults(
         "Could not parse rent from building room API response.",
         `${metadata.buildingName} ${roomName}`.trim(),
         `${target.id}:${roomId}`,
+        [
+          "source=detail_bukken_room",
+          `rawRent=${cleanText(record.rent) || "missing"}`,
+          `rawCommonFee=${cleanText(record.commonfee_sp) || cleanText(record.commonfee) || "missing"}`,
+        ],
       );
     }
 
@@ -152,6 +169,12 @@ export function parseRoomResultFromApi(
       target,
       checkedAt,
       "Room detail API returned no data. This often means the URL has no valid JKSS or the room is no longer available.",
+      target.label || target.id,
+      `${target.id}:${extractJkss(target.url) || "api-empty"}`,
+      [
+        "source=detail_room_api",
+        `jkss=${extractJkss(target.url) || "missing"}`,
+      ],
     );
   }
 
@@ -169,6 +192,11 @@ export function parseRoomResultFromApi(
       "Could not parse rent from room detail API response.",
       title,
       `${target.id}:${roomId}`,
+      [
+        "source=detail_room_api",
+        `rawRent=${rentText || "missing"}`,
+        `rawCommonFee=${commonFeeText || "missing"}`,
+      ],
     );
   }
 
@@ -222,6 +250,11 @@ export function parseRoomResultFromDom(
       "Room detail page did not expose active room data in the rendered DOM.",
       cleanTitle(dom.documentTitle) || target.label || target.id,
       `${target.id}:${extractJkss(target.url) || "dom-error"}`,
+      [
+        "source=detail_room_dom",
+        `documentTitle=${cleanText(dom.documentTitle) || "missing"}`,
+        "bodyContainsNotFound=true",
+      ],
     );
   }
 
@@ -238,6 +271,13 @@ export function parseRoomResultFromDom(
       "Could not parse rent from rendered DOM.",
       title,
       `${target.id}:${roomId}`,
+      [
+        "source=detail_room_dom",
+        `documentTitle=${cleanText(dom.documentTitle) || "missing"}`,
+        `roomNameText=${cleanText(dom.roomNameText) || "missing"}`,
+        `rentText=${cleanText(dom.rentText) || "missing"}`,
+        `commonFeeText=${cleanText(dom.commonFeeText) || "missing"}`,
+      ],
     );
   }
 
@@ -289,6 +329,7 @@ function buildParseFailureResult(
   message: string,
   title = target.label || target.id,
   resultId = `${target.id}:error`,
+  parseEvidence: string[] = [],
 ): CrawlResult {
   return {
     id: resultId,
@@ -304,6 +345,7 @@ function buildParseFailureResult(
     checkedAt,
     parseStatus: "parse_failed",
     parseMessage: message,
+    parseEvidence,
   };
 }
 

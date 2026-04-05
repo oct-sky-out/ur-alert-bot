@@ -1,6 +1,7 @@
 import { chromium, type Page } from "playwright";
 
 import {
+  inspectBuildingPageHtml,
   parseBuildingPageMetadata,
   parseContactInfoFromHtml,
   parseBuildingRoomResults,
@@ -69,7 +70,13 @@ async function crawlBuildingTarget(
     const response = await fetch(target.url);
 
     if (!response.ok) {
-      return [buildFailureResult(target, checkedAt, `HTTP ${response.status} while opening the building page.`)];
+      return [
+        buildFailureResult(target, checkedAt, `HTTP ${response.status} while opening the building page.`, [
+          "source=building_page",
+          `status=${response.status}`,
+          `url=${target.url}`,
+        ]),
+      ];
     }
 
     const html = await response.text();
@@ -81,6 +88,7 @@ async function crawlBuildingTarget(
           target,
           checkedAt,
           "Could not parse building identifiers from the target page.",
+          inspectBuildingPageHtml(html, target),
         ),
       ];
     }
@@ -89,7 +97,7 @@ async function crawlBuildingTarget(
 
     return parseBuildingRoomResults(records, metadata, target, config, checkedAt);
   } catch (error) {
-    return [buildFailureResult(target, checkedAt, toErrorMessage(error))];
+    return [buildFailureResult(target, checkedAt, toErrorMessage(error), toErrorEvidence(error))];
   }
 }
 
@@ -115,7 +123,16 @@ async function fetchAllBuildingRooms(
     const nextPage = await fetchBuildingRoomPage(metadata, pageIndex);
 
     if (nextPage === null) {
-      throw new Error(`Building room API returned null for pageIndex=${pageIndex}.`);
+      throw new CrawlDiagnosticError(
+        `Building room API returned null for pageIndex=${pageIndex}.`,
+        [
+          "source=detail_bukken_room",
+          `pageIndex=${pageIndex}`,
+          `shisya=${metadata.shisya}`,
+          `danchi=${metadata.danchi}`,
+          `shikibetu=${metadata.shikibetu}`,
+        ],
+      );
     }
 
     records.push(...nextPage);
@@ -146,7 +163,14 @@ async function fetchBuildingRoomPage(
   });
 
   if (!response.ok) {
-    throw new Error(`Building room API failed with status ${response.status}.`);
+    throw new CrawlDiagnosticError(`Building room API failed with status ${response.status}.`, [
+      "source=detail_bukken_room",
+      `pageIndex=${pageIndex}`,
+      `status=${response.status}`,
+      `shisya=${metadata.shisya}`,
+      `danchi=${metadata.danchi}`,
+      `shikibetu=${metadata.shikibetu}`,
+    ]);
   }
 
   const payload = (await response.json()) as unknown;
@@ -156,7 +180,14 @@ async function fetchBuildingRoomPage(
   }
 
   if (!Array.isArray(payload)) {
-    throw new Error("Building room API returned a non-array payload.");
+    throw new CrawlDiagnosticError("Building room API returned a non-array payload.", [
+      "source=detail_bukken_room",
+      `pageIndex=${pageIndex}`,
+      `payloadType=${typeof payload}`,
+      `shisya=${metadata.shisya}`,
+      `danchi=${metadata.danchi}`,
+      `shikibetu=${metadata.shikibetu}`,
+    ]);
   }
 
   return payload as BuildingRoomApiRecord[];
@@ -198,6 +229,11 @@ async function crawlRoomDetailTarget(
       checkedAt,
       parseStatus: "parse_failed",
       parseMessage: `HTTP ${response.status()} while opening the room detail page.`,
+      parseEvidence: [
+        "source=room_detail_page",
+        `status=${response.status()}`,
+        `url=${target.url}`,
+      ],
     };
   }
 
@@ -242,6 +278,7 @@ function buildFailureResult(
   target: TargetConfig,
   checkedAt: string,
   message: string,
+  parseEvidence: string[] = [],
 ): CrawlResult {
   return {
     id: `${target.id}:error`,
@@ -257,7 +294,18 @@ function buildFailureResult(
     checkedAt,
     parseStatus: "parse_failed",
     parseMessage: message,
+    parseEvidence,
   };
+}
+
+class CrawlDiagnosticError extends Error {
+  readonly evidence: string[];
+
+  constructor(message: string, evidence: string[] = []) {
+    super(message);
+    this.name = "CrawlDiagnosticError";
+    this.evidence = evidence;
+  }
 }
 
 function isRoomDetailUrl(urlText: string): boolean {
@@ -270,6 +318,14 @@ function toErrorMessage(error: unknown): string {
   }
 
   return String(error);
+}
+
+function toErrorEvidence(error: unknown): string[] {
+  if (error instanceof CrawlDiagnosticError) {
+    return error.evidence;
+  }
+
+  return [];
 }
 
 function toNumber(value: string | undefined): number | null {

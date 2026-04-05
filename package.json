@@ -4,7 +4,7 @@
   "private": true,
   "description": "UR housing alert bot with Playwright, TypeScript, JSON state, ntfy, and GitHub Actions scheduling.",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

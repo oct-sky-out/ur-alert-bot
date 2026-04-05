@@ -4,8 +4,11 @@ import path from "node:path";
 import type { DailyState, LatestState, SnapshotState } from "./types.js";
 
 const STATE_DIR = path.resolve("state");
+const STATE_RELATIVE_DIR = "state";
 const SNAPSHOTS_DIR = path.join(STATE_DIR, "snapshots");
+const SNAPSHOTS_RELATIVE_DIR = path.join(STATE_RELATIVE_DIR, "snapshots");
 const DAILY_DIR = path.join(STATE_DIR, "daily");
+const DAILY_RELATIVE_DIR = path.join(STATE_RELATIVE_DIR, "daily");
 const LATEST_PATH = path.join(STATE_DIR, "latest.json");
 
 export async function ensureStateDirs(): Promise<void> {
@@ -25,15 +28,28 @@ export function getSnapshotPath(filename: string): string {
   return path.join(SNAPSHOTS_DIR, filename);
 }
 
+export function getSnapshotRelativePath(filename: string): string {
+  return path.join(SNAPSHOTS_RELATIVE_DIR, filename);
+}
+
 export function getDailyPath(filename: string): string {
   return path.join(DAILY_DIR, filename);
 }
 
+export function getDailyRelativePath(filename: string): string {
+  return path.join(DAILY_RELATIVE_DIR, filename);
+}
+
 export async function loadLatestState(): Promise<LatestState> {
-  return readJsonOrDefault<LatestState>(LATEST_PATH, {
+  const state = await readJsonOrDefault<LatestState>(LATEST_PATH, {
     lastRunAt: null,
     latestSnapshotPath: null,
   });
+
+  return {
+    ...state,
+    latestSnapshotPath: normalizeStoredSnapshotPath(state.latestSnapshotPath),
+  };
 }
 
 export async function loadSnapshot(snapshotPath: string | null): Promise<SnapshotState | null> {
@@ -41,7 +57,16 @@ export async function loadSnapshot(snapshotPath: string | null): Promise<Snapsho
     return null;
   }
 
-  return readJsonOrDefault<SnapshotState | null>(path.resolve(snapshotPath), null);
+  const normalizedSnapshotPath = normalizeStoredSnapshotPath(snapshotPath);
+
+  if (!normalizedSnapshotPath) {
+    return null;
+  }
+
+  return readJsonOrDefault<SnapshotState | null>(
+    path.resolve(normalizedSnapshotPath),
+    null,
+  );
 }
 
 export async function loadDailyState(date: string): Promise<DailyState> {
@@ -58,10 +83,11 @@ export async function saveSnapshot(snapshot: SnapshotState): Promise<string> {
 
   const filename = buildSnapshotFilename(snapshot.runAt);
   const filePath = getSnapshotPath(filename);
+  const relativePath = getSnapshotRelativePath(filename);
 
   await writeJson(filePath, snapshot);
 
-  return filePath;
+  return relativePath;
 }
 
 export async function saveDailyState(state: DailyState): Promise<string> {
@@ -95,4 +121,16 @@ async function readJsonOrDefault<T>(filePath: string, fallback: T): Promise<T> {
 
 async function writeJson(filePath: string, payload: unknown): Promise<void> {
   await writeFile(filePath, JSON.stringify(payload, null, 2) + "\n", "utf8");
+}
+
+function normalizeStoredSnapshotPath(snapshotPath: string | null): string | null {
+  if (!snapshotPath) {
+    return null;
+  }
+
+  if (!path.isAbsolute(snapshotPath)) {
+    return snapshotPath;
+  }
+
+  return getSnapshotRelativePath(path.basename(snapshotPath));
 }

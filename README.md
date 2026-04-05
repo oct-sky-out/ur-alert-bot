@@ -20,6 +20,8 @@ UR 주택 단지 페이지 URL 목록을 주기적으로 확인하고, 사용자
 
 ### 1. 로컬 설치
 
+권장 로컬 Node.js 버전은 `22+`이고, GitHub Actions CI는 `Node.js 24` 기준으로 실행한다.
+
 ```bash
 cd /Users/minsukim/ur-alert-bot
 npm install
@@ -208,10 +210,14 @@ state/
 
 - `state/snapshots/*.json`
   - 매 실행 시점의 전체 수집 결과와 `matchedIds`
+  - `diagnostics`
+    - parse 실패 개수
+    - 구조 변경 의심 여부
+    - 경고 메시지 목록
 - `state/daily/YYYY-MM-DD.json`
   - 그날 이미 `사라짐 알림`을 보낸 `goneReportedIds`
 - `state/latest.json`
-  - 직전 실행의 snapshot 경로와 마지막 실행 시각
+  - 직전 실행의 상대 snapshot 경로와 마지막 실행 시각
 
 ### 보존 규칙
 
@@ -261,6 +267,8 @@ on:
 - workflow는 반드시 직렬 처리한다.
 - 같은 저장소에서 겹치는 실행을 막기 위해 `concurrency`를 설정한다.
 - 상태 파일을 갱신한 뒤에는 workflow가 직접 commit/push 한다.
+- workflow는 `Node.js 24`와 최신 major GitHub Action(`checkout/setup-node/cache`) 기준으로 유지한다.
+- parse 실패가 많거나 결과가 0건이면 workflow 로그에 구조 변경 의심 경고를 남긴다.
 
 ## 권장 프로젝트 구조
 
