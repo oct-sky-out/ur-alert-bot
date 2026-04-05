@@ -429,6 +429,144 @@
       "enabled": true
     },
     {
+      "id": "tokyo-20-2400",
+      "label": "上馬二丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2400.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5000",
+      "label": "経堂赤堤通り *きょうどうあかつつみどおり",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5000.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5170",
+      "label": "シティハイツ烏山",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5170.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5220",
+      "label": "世田谷通りシティハイツ若林",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5220.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5440",
+      "label": "フレール西経堂",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5440.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5780",
+      "label": "シティコート世田谷給田",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5780.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6570",
+      "label": "シティコート二子玉川",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6570.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6710",
+      "label": "芦花公園 *ろかこうえん",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6710.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6920",
+      "label": "アクティ芦花公園 *アクティろかこうえん",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6920.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4640",
+      "label": "エステート池上",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4640.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5540",
+      "label": "アミティ大森東",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5540.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5340",
+      "label": "シャレール糀谷 *しゃれーるこうじや",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5340.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5480",
+      "label": "シャレール新蒲田 *しゃれーるしんかまだ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5480.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5830",
+      "label": "アミティ南六郷",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5830.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7220",
+      "label": "コンフォール品川西大井",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7220.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1960",
+      "label": "南六郷二丁目 *みなみろくごうにちょうめ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1960.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2030",
+      "label": "大森中二丁目 *おおもりなかにちょうめ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2030.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2910",
+      "label": "南六郷一丁目 *みなみろくごういっちょうめ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2910.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3110",
+      "label": "蒲田本町一丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3110.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3890",
+      "label": "大森南二丁目ハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3890.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4430",
+      "label": "パティオ新蒲田三丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4430.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3640",
+      "label": "品川八潮パークタウン 潮路南第一ハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3640.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1830",
+      "label": "大井六丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1830.html",
+      "enabled": true
+    },
+    {
       "id": "saitama-50-3710",
       "label": "コンフォール与野本町西",
       "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3710.html",
