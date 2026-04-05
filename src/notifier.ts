@@ -14,10 +14,11 @@ const copy = {
     currentBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatContactNameLine("ko", item),
+        formatContactPhoneLine("ko", item),
         `  - 월세: ${formatYen(item.rentYen)}엔`,
         `  - 공익비: ${formatYen(item.feeYen)}엔`,
         `  - 합계: ${formatYen(item.totalPriceYen)}엔`,
-        formatContactLine("ko", item),
         `  - [상세 보기](${item.url})`,
       ]
         .filter(Boolean)
@@ -25,8 +26,9 @@ const copy = {
     goneBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatContactNameLine("ko", item),
+        formatContactPhoneLine("ko", item),
         "  - 상태: 이번 회차 기준 조건 미충족",
-        formatContactLine("ko", item),
         `  - [상세 보기](${item.url})`,
       ]
         .filter(Boolean)
@@ -39,10 +41,11 @@ const copy = {
     currentBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatContactNameLine("ja", item),
+        formatContactPhoneLine("ja", item),
         `  - 家賃: ${formatYen(item.rentYen)}円`,
         `  - 共益費: ${formatYen(item.feeYen)}円`,
         `  - 合計: ${formatYen(item.totalPriceYen)}円`,
-        formatContactLine("ja", item),
         `  - [詳細を見る](${item.url})`,
       ]
         .filter(Boolean)
@@ -50,8 +53,9 @@ const copy = {
     goneBlock: (item: CrawlResult) =>
       [
         `- **${escapeMarkdown(item.title)}**`,
+        formatContactNameLine("ja", item),
+        formatContactPhoneLine("ja", item),
         "  - 状態: 今回実行時点で条件未達",
-        formatContactLine("ja", item),
         `  - [詳細を見る](${item.url})`,
       ]
         .filter(Boolean)
@@ -114,12 +118,12 @@ export async function sendNtfyNotifications(
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
+        Markdown: "yes",
       },
       body: JSON.stringify({
         topic,
         title: message.title,
         message: message.body,
-        markdown: true,
       }),
     });
 
@@ -133,31 +137,30 @@ function formatYen(value: number): string {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-function formatContactLine(language: Language, item: CrawlResult): string {
+function formatContactNameLine(language: Language, item: CrawlResult): string {
   const name = item.contactName ? escapeMarkdown(item.contactName) : "";
-  const phone = item.contactPhone ? `[${item.contactPhone}](tel:${toDialable(item.contactPhone)})` : "";
 
-  if (!name && !phone) {
+  if (!name) {
     return "";
   }
 
   if (language === "ko") {
-    if (name && phone) {
-      return `  - 문의처: ${name} / ${phone}`;
-    }
-
-    return `  - 문의처: ${name || phone}`;
+    return `  - 문의처: ${name}`;
   }
 
-  if (name && phone) {
-    return `  - 問い合わせ先: ${name} / ${phone}`;
-  }
-
-  return `  - 問い合わせ先: ${name || phone}`;
+  return `  - 問い合わせ先: ${name}`;
 }
 
-function toDialable(phone: string): string {
-  return phone.replace(/[^\d+]/g, "");
+function formatContactPhoneLine(language: Language, item: CrawlResult): string {
+  if (!item.contactPhone) {
+    return "";
+  }
+
+  if (language === "ko") {
+    return `  - 전화: ${item.contactPhone}`;
+  }
+
+  return `  - 電話: ${item.contactPhone}`;
 }
 
 function escapeMarkdown(value: string): string {
