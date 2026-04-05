@@ -7,6 +7,8 @@ interface BuildNotificationsInput {
   runLabel: string;
 }
 
+const MAX_ITEMS_PER_NOTIFICATION = 5;
+
 const copy = {
   ko: {
     currentTitle: (runLabel: string) => `[UR 알림 ${runLabel}] 조건 만족 물건`,
@@ -74,17 +76,21 @@ export function buildNotifications({
   const messages: NotificationMessage[] = [];
 
   if (currentMatches.length > 0) {
-    messages.push({
-      title: localeCopy.currentTitle(runLabel),
-      body: currentMatches.map(localeCopy.currentBlock).join("\n\n"),
-    });
+    messages.push(
+      ...buildSplitMessages(
+        localeCopy.currentTitle(runLabel),
+        currentMatches.map(localeCopy.currentBlock),
+      ),
+    );
   }
 
   if (goneItems.length > 0) {
-    messages.push({
-      title: localeCopy.goneTitle(runLabel),
-      body: goneItems.map(localeCopy.goneBlock).join("\n\n"),
-    });
+    messages.push(
+      ...buildSplitMessages(
+        localeCopy.goneTitle(runLabel),
+        goneItems.map(localeCopy.goneBlock),
+      ),
+    );
   }
 
   if (messages.length === 0) {
@@ -135,6 +141,44 @@ export async function sendNtfyNotifications(
 
 function formatYen(value: number): string {
   return new Intl.NumberFormat("en-US").format(value);
+}
+
+function buildSplitMessages(baseTitle: string, blocks: string[]): NotificationMessage[] {
+  const groupedBlocks = groupBlocks(blocks);
+
+  return groupedBlocks.map((group, index) => ({
+    title: withPartSuffix(baseTitle, index, groupedBlocks.length),
+    body: group.join("\n\n"),
+  }));
+}
+
+function groupBlocks(blocks: string[]): string[][] {
+  const groups: string[][] = [];
+  let currentGroup: string[] = [];
+
+  for (const block of blocks) {
+    if (currentGroup.length >= MAX_ITEMS_PER_NOTIFICATION) {
+      groups.push(currentGroup);
+      currentGroup = [block];
+      continue;
+    }
+
+    currentGroup.push(block);
+  }
+
+  if (currentGroup.length > 0) {
+    groups.push(currentGroup);
+  }
+
+  return groups;
+}
+
+function withPartSuffix(baseTitle: string, index: number, total: number): string {
+  if (total <= 1) {
+    return baseTitle;
+  }
+
+  return `${baseTitle} (${index + 1}/${total})`;
 }
 
 function formatContactNameLine(language: Language, item: CrawlResult): string {
