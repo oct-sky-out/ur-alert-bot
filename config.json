@@ -5,7 +5,7 @@
     "13:00",
     "17:00"
   ],
-  "language": "ko",
+  "language": "ja",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 250000,
   "ntfy": {
