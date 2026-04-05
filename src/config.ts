@@ -26,7 +26,7 @@ const configSchema = z
       serverUrl: z.string().url(),
       topic: z.string().trim().optional().default(""),
     }),
-    targets: z.array(targetSchema).min(1).max(50),
+    targets: z.array(targetSchema).min(1).max(200),
   })
   .superRefine((value, ctx) => {
     const ids = new Set<string>();

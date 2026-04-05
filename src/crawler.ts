@@ -15,6 +15,8 @@ import type { AppConfig, CrawlResult, TargetConfig } from "./types.js";
 
 const NAVIGATION_TIMEOUT_MS = 30_000;
 const API_TIMEOUT_MS = 15_000;
+const TARGET_CHUNK_SIZE = 50;
+const CHUNK_DELAY_MS = 30_000;
 const BUILDING_ROOM_API_URL =
   "https://chintai.r6.ur-net.go.jp/chintai/api/bukken/detail/detail_bukken_room/";
 
@@ -23,8 +25,34 @@ export async function crawlTargets(
   checkedAt: string,
 ): Promise<CrawlResult[]> {
   const enabledTargets = config.targets.filter((item) => item.enabled);
-  const buildingTargets = enabledTargets.filter((item) => !isRoomDetailUrl(item.url));
-  const roomTargets = enabledTargets.filter((item) => isRoomDetailUrl(item.url));
+  const results: CrawlResult[] = [];
+  const chunks = chunkTargets(enabledTargets, TARGET_CHUNK_SIZE);
+
+  for (const [index, chunk] of chunks.entries()) {
+    console.log(
+      `[crawl] chunk ${index + 1}/${chunks.length} started (targets=${chunk.length}, chunkSize=${TARGET_CHUNK_SIZE})`,
+    );
+
+    results.push(...(await crawlTargetChunk(chunk, config, checkedAt)));
+
+    if (index < chunks.length - 1) {
+      console.log(
+        `[crawl] chunk ${index + 1}/${chunks.length} completed; waiting ${Math.round(CHUNK_DELAY_MS / 1000)}s before next chunk`,
+      );
+      await delay(CHUNK_DELAY_MS);
+    }
+  }
+
+  return results;
+}
+
+async function crawlTargetChunk(
+  targets: TargetConfig[],
+  config: Pick<AppConfig, "priceMode" | "maxPriceYen">,
+  checkedAt: string,
+): Promise<CrawlResult[]> {
+  const buildingTargets = targets.filter((item) => !isRoomDetailUrl(item.url));
+  const roomTargets = targets.filter((item) => isRoomDetailUrl(item.url));
   const results: CrawlResult[] = [];
 
   for (const target of buildingTargets) {
@@ -336,4 +364,18 @@ function toNumber(value: string | undefined): number | null {
   const parsed = Number(value);
 
   return Number.isFinite(parsed) ? parsed : null;
+}
+
+function chunkTargets(targets: TargetConfig[], chunkSize: number): TargetConfig[][] {
+  const chunks: TargetConfig[][] = [];
+
+  for (let index = 0; index < targets.length; index += chunkSize) {
+    chunks.push(targets.slice(index, index + chunkSize));
+  }
+
+  return chunks;
+}
+
+function delay(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }

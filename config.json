@@ -5,24 +5,504 @@
     "13:00",
     "17:00"
   ],
-  "language": "ja",
+  "language": "ko",
   "priceMode": "rent_plus_fee",
-  "maxPriceYen": 250000,
+  "maxPriceYen": 160000,
   "ntfy": {
     "serverUrl": "https://ntfy.sh",
     "topic": ""
   },
   "targets": [
     {
-      "id": "tokyo-20-6870",
-      "label": "プロムナード荻窪",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870.html",
+      "id": "tokyo-20-7080",
+      "label": "イーストコア曳舟二番館",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7080.html",
       "enabled": true
     },
     {
-      "id": "tokyo-20-7130",
-      "label": "シャレール荻窪",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7130.html",
+      "id": "tokyo-20-4440",
+      "label": "リバーピア吾妻橋 ライフタワー",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4440.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-0420",
+      "label": "野方",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_0420.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7200",
+      "label": "コンフォール中野新橋",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7200.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2380",
+      "label": "練馬北町一丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2380.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6560",
+      "label": "大泉学園ゆめりあタワー",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6560.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5351",
+      "label": "にしき平和台",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5351.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5250",
+      "label": "パークサイド石神井",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5250.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4650",
+      "label": "グリーンプラザ高松＜光が丘＞",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4650.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4590",
+      "label": "アーバンライフゆりの木通り東 ＜光が丘＞",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4590.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4550",
+      "label": "光が丘パークタウン 大通り中央 ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4550.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4350",
+      "label": "光が丘パークタウン プロムナード十番街 ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4350.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4100",
+      "label": "光が丘パークタウン 四季の香弐番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4100.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3910",
+      "label": "光が丘パークタウン いちょう通り八番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3910.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3690",
+      "label": "光が丘パークタウン 大通り南",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3690.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3500",
+      "label": "光が丘パークタウン 公園南",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3500.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2410",
+      "label": "むつみ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2410.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6410",
+      "label": "晴海アイランド トリトンスクエアアーバンタワー",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6410.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5690",
+      "label": "晴海アイランド トリトンスクエアガーデンプラザ ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5690.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5630",
+      "label": "晴海アイランド トリトンスクエアビュープラザ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5630.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2170",
+      "label": "月島一丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2170.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1860",
+      "label": "晴海四丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1860.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3820",
+      "label": "神田小川町ハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3820.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6950",
+      "label": "イーストコモンズ清澄白河セントラルタワー",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6950.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6610",
+      "label": "ラ・ヴェール東陽町",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6610.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6460",
+      "label": "潮見駅前プラザ二番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6460.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3860",
+      "label": "木場三丁目パークハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3860.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3570",
+      "label": "木場公園平野住宅",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3570.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3450",
+      "label": "木場公園三好住宅",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3450.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3200",
+      "label": "豊洲四丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3200.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2940",
+      "label": "北砂七丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2940.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2820",
+      "label": "北砂五丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2820.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2660",
+      "label": "福住一丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2660.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1780",
+      "label": "大島四丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1780.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1660",
+      "label": "亀戸二丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1660.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4040",
+      "label": "曳舟駅前プラザ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4040.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7150",
+      "label": "コンフォール根岸",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7150.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4020",
+      "label": "エステート北新宿",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4020.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4000",
+      "label": "哲学堂公園ハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4000.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4920",
+      "label": "デュプレ芝浦",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4920.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6630",
+      "label": "リバーハープコート南千住",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6630.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7180",
+      "label": "コンフォール町屋",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7180.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4290",
+      "label": "南千住七丁目ハイツ ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4290.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6240",
+      "label": "リバーハープタワー南千住",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6240.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-3620",
+      "label": "葛西クリーンタウン 清新南ハイツ ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3620.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2950",
+      "label": "金町第二",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-1650",
+      "label": "金町駅前",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_1650.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6740",
+      "label": "ハートアイランド新田一番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6740.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6810",
+      "label": "ハートアイランド新田二番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6810.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6980",
+      "label": "ハートアイランド新田三番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6980.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7000",
+      "label": "パークタウン東綾瀬",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7000.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7050",
+      "label": "フレール西新井中央公園",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7050.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-7120",
+      "label": "ハートアイランド新田四番街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_7120.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5320",
+      "label": "アーバンライフ西新井",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5320.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2810",
+      "label": "大谷田一丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2810.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6771",
+      "label": "ひばりが丘パークヒルズ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4900",
+      "label": "新柳沢",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4900.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-0310",
+      "label": "東伏見",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_0310.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-4450",
+      "label": "グリーンハイツ車返南 ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_4450.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2700",
+      "label": "くるまがえし",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2700.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6690",
+      "label": "牟礼(むれ)",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6690.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6601",
+      "label": "三鷹台",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6601.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-6580",
+      "label": "シティハイツ吉祥寺通り",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6580.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5570",
+      "label": "シティコート下連雀",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5570.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5360",
+      "label": "新川・島屋敷通り",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5360.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5970",
+      "label": "サンヴァリエ桜堤",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5970.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-5450",
+      "label": "武蔵野緑町パークタウン",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5450.html",
+      "enabled": true
+    },
+    {
+      "id": "tokyo-20-2540",
+      "label": "小島町二丁目",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2540.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-3710",
+      "label": "コンフォール与野本町西",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3710.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-3270",
+      "label": "アーバンハイツ与野",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3270.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-4110",
+      "label": "コンフォール領家",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_4110.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-1530",
+      "label": "浦和白幡 *うらわしらはた",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_1530.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-2420",
+      "label": "浦和別所ハイツ",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2420.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-2450",
+      "label": "南浦和第二 みなみうらわだいに",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2450.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-2530",
+      "label": "うらわイーストシティ けやき街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-2900",
+      "label": "うらわイーストシティ ひのき街",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2900.html",
+      "enabled": true
+    },
+    {
+      "id": "saitama-50-3931",
+      "label": "コンフォール南浦和",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3931.html",
+      "enabled": true
+    },
+    {
+      "id": "kanagawa-40-4040",
+      "label": "リーデンスフォート横浜",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_4040.html",
+      "enabled": true
+    },
+    {
+      "id": "kanagawa-40-4140",
+      "label": "アミティ横浜",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_4140.html",
+      "enabled": true
+    },
+    {
+      "id": "kanagawa-40-3600",
+      "label": "コンフォール高島台",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_3600.html",
+      "enabled": true
+    },
+    {
+      "id": "kanagawa-40-3190",
+      "label": "ヨコハマポートサイドロア弐番館",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_3190.html",
+      "enabled": true
+    },
+    {
+      "id": "kanagawa-40-2990",
+      "label": "アルテ横浜",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_2990.html",
       "enabled": true
     }
   ]

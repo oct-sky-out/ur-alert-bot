@@ -10,11 +10,13 @@
 - 금액 조건과 공실 여부를 기준으로 `ntfy` 알림을 보낸다.
 - 하루 `3회` 고정 시각에 GitHub Actions로 실행한다.
 - 최근 `7일` 상태 파일만 유지한다.
+- `targets`는 최대 `200개`까지 허용한다.
+- 조회는 `50개 단위 청크`로 나누고 청크 사이에 `30초` 대기한다.
 
 ## 핵심 동작 요약
 
 1. `config.json` 로드
-2. 활성화된 `targets` 순회
+2. 활성화된 `targets`를 50개 단위 청크로 분할
 3. 단지 페이지면 `detail_bukken_room` API 조회
 4. 상세 페이지면 Playwright fallback 사용
 5. 현재 회차 결과를 `CrawlResult[]`로 정규화
@@ -58,6 +60,8 @@
   - `NTFY_TOPIC` 환경변수 우선 적용
 - [src/crawler.ts](/Users/minsukim/ur-alert-bot/src/crawler.ts)
   - 단지 페이지/상세 페이지 수집 분기
+  - `TARGET_CHUNK_SIZE = 50`
+  - `CHUNK_DELAY_MS = 30000`
   - building page: `detail_bukken_room`
   - room detail: Playwright fallback
 - [src/parser.ts](/Users/minsukim/ur-alert-bot/src/parser.ts)
@@ -164,6 +168,13 @@ state/
 - gone은 하루 1회만 알림
 - 언어는 `ko` 또는 `ja`
 - 전화번호가 있으면 본문에 포함
+
+### 조회 규칙
+
+- 전체 target을 한 번에 처리하지 않는다.
+- 최대 `50개`씩 처리한다.
+- 청크가 남아 있으면 다음 청크 전 `30초` 대기한다.
+- 최대 `200개` target을 전제로 운영한다.
 
 ### 스케줄
 
