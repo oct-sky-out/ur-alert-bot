@@ -1,0 +1,28 @@
+{
+  "runAt": "2026-04-05T20:13:03+09:00",
+  "priceMode": "rent_plus_fee",
+  "maxPriceYen": 250000,
+  "language": "ko",
+  "matchedIds": [
+    "tokyo-20-6870:000030806"
+  ],
+  "results": [
+    {
+      "id": "tokyo-20-6870:000030806",
+      "targetId": "tokyo-20-6870",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6870_room.html?JKSS=000030806",
+      "title": "プロムナード荻窪 3号棟806号室",
+      "buildingName": "プロムナード荻窪",
+      "roomId": "000030806",
+      "rentYen": 229200,
+      "feeYen": 10500,
+      "totalPriceYen": 239700,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-04-05T20:13:03+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "2LDK | 8階"
+    }
+  ]
+}
