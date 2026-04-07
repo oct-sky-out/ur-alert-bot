@@ -1,0 +1,197 @@
+{
+  "runAt": "2026-04-07T21:06:59+09:00",
+  "priceMode": "rent_plus_fee",
+  "maxPriceYen": 160000,
+  "discountFilter": {
+    "mode": "exclude",
+    "systems": [
+      "子育て割",
+      "すくすく割"
+    ]
+  },
+  "language": "ko",
+  "matchedIds": [
+    "tokyo-20-2950:000010543",
+    "tokyo-20-5360:000140403",
+    "tokyo-20-6710:000170504",
+    "saitama-50-2530:000040501"
+  ],
+  "results": [
+    {
+      "id": "tokyo-20-2950:000010543",
+      "targetId": "tokyo-20-2950",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950_room.html?JKSS=000010543",
+      "title": "金町第二 1号棟543号室",
+      "buildingName": "金町第二",
+      "roomId": "000010543",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ北千住",
+      "contactPhone": "03-5244-2877",
+      "rentYen": 118700,
+      "feeYen": 4400,
+      "totalPriceYen": 123100,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "1LDK | 5階 | 近居割 | 近居割WIDE"
+    },
+    {
+      "id": "tokyo-20-5360:000140403",
+      "targetId": "tokyo-20-5360",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5360.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5360_room.html?JKSS=000140403",
+      "title": "新川・島屋敷通り 14号棟403号室",
+      "buildingName": "新川・島屋敷通り",
+      "roomId": "000140403",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ吉祥寺",
+      "contactPhone": "0422-71-2851",
+      "rentYen": 119800,
+      "feeYen": 5650,
+      "totalPriceYen": 125450,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "1K | 4階 | 近居割 | 近居割WIDE"
+    },
+    {
+      "id": "tokyo-20-6710:000170504",
+      "targetId": "tokyo-20-6710",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6710.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6710_room.html?JKSS=000170504",
+      "title": "芦花公園 *ろかこうえん 17号棟504号室",
+      "buildingName": "芦花公園 *ろかこうえん",
+      "roomId": "000170504",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ千歳烏山",
+      "contactPhone": "03-6279-6672",
+      "rentYen": 133200,
+      "feeYen": 6300,
+      "totalPriceYen": 139500,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "1DK | 5階 | 近居割"
+    },
+    {
+      "id": "saitama-50-2530:000050503",
+      "targetId": "saitama-50-2530",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530_room.html?JKSS=000050503",
+      "title": "うらわイーストシティ けやき街 5号棟503号室",
+      "buildingName": "うらわイーストシティ けやき街",
+      "roomId": "000050503",
+      "discountSystems": [
+        "子育て割"
+      ],
+      "rentBasis": "discount_pre_rent",
+      "priceInquiryRequired": true,
+      "contactName": "UR賃貸ショップ南浦和",
+      "contactPhone": "048-882-6721",
+      "rentYen": 98400,
+      "feeYen": 4000,
+      "totalPriceYen": 102400,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "3LDK | 5階 | 子育て割"
+    },
+    {
+      "id": "saitama-50-2530:000120305",
+      "targetId": "saitama-50-2530",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530_room.html?JKSS=000120305",
+      "title": "うらわイーストシティ けやき街 12号棟305号室",
+      "buildingName": "うらわイーストシティ けやき街",
+      "roomId": "000120305",
+      "discountSystems": [
+        "子育て割"
+      ],
+      "rentBasis": "discount_pre_rent",
+      "priceInquiryRequired": true,
+      "contactName": "UR賃貸ショップ南浦和",
+      "contactPhone": "048-882-6721",
+      "rentYen": 103600,
+      "feeYen": 4000,
+      "totalPriceYen": 107600,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "3LDK | 3階 | 子育て割"
+    },
+    {
+      "id": "saitama-50-2530:000060406",
+      "targetId": "saitama-50-2530",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530_room.html?JKSS=000060406",
+      "title": "うらわイーストシティ けやき街 6号棟406号室",
+      "buildingName": "うらわイーストシティ けやき街",
+      "roomId": "000060406",
+      "discountSystems": [
+        "子育て割"
+      ],
+      "rentBasis": "discount_pre_rent",
+      "priceInquiryRequired": true,
+      "contactName": "UR賃貸ショップ南浦和",
+      "contactPhone": "048-882-6721",
+      "rentYen": 110000,
+      "feeYen": 4000,
+      "totalPriceYen": 114000,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "3LDK | 4階 | 子育て割"
+    },
+    {
+      "id": "saitama-50-2530:000040501",
+      "targetId": "saitama-50-2530",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2530_room.html?JKSS=000040501",
+      "title": "うらわイーストシティ けやき街 4号棟501号室",
+      "buildingName": "うらわイーストシティ けやき街",
+      "roomId": "000040501",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ南浦和",
+      "contactPhone": "048-882-6721",
+      "rentYen": 127200,
+      "feeYen": 4000,
+      "totalPriceYen": 131200,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-04-07T21:06:59+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "4LDK | 5階 | 近居割"
+    }
+  ],
+  "diagnostics": {
+    "totalResults": 7,
+    "matchedCount": 4,
+    "parseFailureCount": 0,
+    "structureChangeSuspected": false,
+    "warnings": [],
+    "parseFailureIds": []
+  }
+}
