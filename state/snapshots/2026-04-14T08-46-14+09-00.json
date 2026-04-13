@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-04-07T10:21:21+09:00",
+  "runAt": "2026-04-14T08:46:14+09:00",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 160000,
   "discountFilter": {
@@ -11,42 +11,68 @@
   },
   "language": "ko",
   "matchedIds": [
-    "tokyo-20-2950:000010543",
+    "tokyo-20-6460:000000620",
+    "tokyo-20-6771:006050506",
+    "saitama-50-2450:000530704",
     "saitama-50-2530:000040501"
   ],
   "results": [
     {
-      "id": "tokyo-20-2950:000010543",
-      "targetId": "tokyo-20-2950",
-      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950_room.html?JKSS=000010543",
-      "title": "金町第二 1号棟543号室",
-      "buildingName": "金町第二",
-      "roomId": "000010543",
+      "id": "tokyo-20-6410:000050702",
+      "targetId": "tokyo-20-6410",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6410.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6410_room.html?JKSS=000050702",
+      "title": "晴海アイランド トリトンスクエアアーバンタワー 5号棟702号室",
+      "buildingName": "晴海アイランド トリトンスクエアアーバンタワー",
+      "roomId": "000050702",
       "discountSystems": [
         "近居割"
       ],
       "rentBasis": "listed_rent",
       "priceInquiryRequired": false,
-      "contactName": "UR賃貸ショップ北千住",
-      "contactPhone": "03-5244-2877",
-      "rentYen": 118700,
-      "feeYen": 4400,
-      "totalPriceYen": 123100,
+      "contactName": "UR晴海現地案内所",
+      "contactPhone": "03-5144-0161",
+      "rentYen": 196800,
+      "feeYen": 6500,
+      "totalPriceYen": 203300,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-04-14T08:46:14+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "1K | 7階 | 近居割"
+    },
+    {
+      "id": "tokyo-20-6460:000000620",
+      "targetId": "tokyo-20-6460",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6460.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6460_room.html?JKSS=000000620",
+      "title": "潮見駅前プラザ二番街 620号室",
+      "buildingName": "潮見駅前プラザ二番街",
+      "roomId": "000000620",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR八重洲営業センター",
+      "contactPhone": "03-3271-0611",
+      "rentYen": 144000,
+      "feeYen": 6800,
+      "totalPriceYen": 150800,
       "isAvailable": true,
       "isMatched": true,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
-      "parseMessage": "1LDK | 5階 | 近居割 | 近居割WIDE"
+      "parseMessage": "1LDK | 6階 | 近居割"
     },
     {
-      "id": "tokyo-20-6771:005040102",
+      "id": "tokyo-20-6771:006050506",
       "targetId": "tokyo-20-6771",
       "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771_room.html?JKSS=005040102",
-      "title": "ひばりが丘パークヒルズ 5-4号棟102号室",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771_room.html?JKSS=006050506",
+      "title": "ひばりが丘パークヒルズ 6-5号棟506号室",
       "buildingName": "ひばりが丘パークヒルズ",
-      "roomId": "005040102",
+      "roomId": "006050506",
       "discountSystems": [
         "近居割"
       ],
@@ -54,38 +80,64 @@
       "priceInquiryRequired": false,
       "contactName": "UR賃貸ショップひばりヶ丘",
       "contactPhone": "042-439-1301",
-      "rentYen": 163000,
+      "rentYen": 98600,
       "feeYen": 7000,
-      "totalPriceYen": 170000,
+      "totalPriceYen": 105600,
       "isAvailable": true,
-      "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "isMatched": true,
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
-      "parseMessage": "2LDK | 1階 | 近居割 | 近居割WIDE"
+      "parseMessage": "1DK | 5階 | 近居割 | 近居割WIDE"
     },
     {
-      "id": "tokyo-20-6771:005060512",
-      "targetId": "tokyo-20-6771",
-      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6771_room.html?JKSS=005060512",
-      "title": "ひばりが丘パークヒルズ 5-6号棟512号室",
-      "buildingName": "ひばりが丘パークヒルズ",
-      "roomId": "005060512",
+      "id": "tokyo-20-6570:error",
+      "targetId": "tokyo-20-6570",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6570.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6570.html",
+      "title": "シティコート二子玉川",
+      "discountSystems": [],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "rentYen": 0,
+      "feeYen": 0,
+      "totalPriceYen": 0,
+      "isAvailable": false,
+      "isMatched": false,
+      "checkedAt": "2026-04-14T08:46:14+09:00",
+      "parseStatus": "parse_failed",
+      "parseMessage": "Building room API failed with status 500.",
+      "parseEvidence": [
+        "source=detail_bukken_room",
+        "pageIndex=0",
+        "status=500",
+        "shisya=20",
+        "danchi=657",
+        "shikibetu=0"
+      ]
+    },
+    {
+      "id": "saitama-50-2450:000530704",
+      "targetId": "saitama-50-2450",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2450.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_2450_room.html?JKSS=000530704",
+      "title": "南浦和第二 みなみうらわだいに 53号棟704号室",
+      "buildingName": "南浦和第二 みなみうらわだいに",
+      "roomId": "000530704",
       "discountSystems": [
         "近居割"
       ],
       "rentBasis": "listed_rent",
       "priceInquiryRequired": false,
-      "contactName": "UR賃貸ショップひばりヶ丘",
-      "contactPhone": "042-439-1301",
-      "rentYen": 167300,
-      "feeYen": 7000,
-      "totalPriceYen": 174300,
+      "contactName": "UR賃貸ショップ南浦和",
+      "contactPhone": "048-882-6721",
+      "rentYen": 124900,
+      "feeYen": 5000,
+      "totalPriceYen": 129900,
       "isAvailable": true,
-      "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "isMatched": true,
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
-      "parseMessage": "3LDK | 5階 | 近居割 | 近居割WIDE"
+      "parseMessage": "3DK | 7階 | 近居割 | 近居割WIDE"
     },
     {
       "id": "saitama-50-2530:000050503",
@@ -107,7 +159,7 @@
       "totalPriceYen": 102400,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 5階 | 子育て割"
     },
@@ -131,7 +183,7 @@
       "totalPriceYen": 107600,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 3階 | 子育て割"
     },
@@ -155,7 +207,7 @@
       "totalPriceYen": 114000,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 4階 | 子育て割"
     },
@@ -179,41 +231,21 @@
       "totalPriceYen": 131200,
       "isAvailable": true,
       "isMatched": true,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
+      "checkedAt": "2026-04-14T08:46:14+09:00",
       "parseStatus": "ok",
       "parseMessage": "4LDK | 5階 | 近居割"
-    },
-    {
-      "id": "saitama-50-3931:000170601",
-      "targetId": "saitama-50-3931",
-      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3931.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/saitama/50_3931_room.html?JKSS=000170601",
-      "title": "コンフォール南浦和 17号棟601号室",
-      "buildingName": "コンフォール南浦和",
-      "roomId": "000170601",
-      "discountSystems": [
-        "近居割"
-      ],
-      "rentBasis": "listed_rent",
-      "priceInquiryRequired": false,
-      "contactName": "UR賃貸ショップ南浦和",
-      "contactPhone": "048-882-6721",
-      "rentYen": 158300,
-      "feeYen": 6000,
-      "totalPriceYen": 164300,
-      "isAvailable": true,
-      "isMatched": false,
-      "checkedAt": "2026-04-07T10:21:21+09:00",
-      "parseStatus": "ok",
-      "parseMessage": "2LDK | 6階 | 近居割 | 近居割WIDE"
     }
   ],
   "diagnostics": {
-    "totalResults": 8,
-    "matchedCount": 2,
-    "parseFailureCount": 0,
+    "totalResults": 9,
+    "matchedCount": 4,
+    "parseFailureCount": 1,
     "structureChangeSuspected": false,
-    "warnings": [],
-    "parseFailureIds": []
+    "warnings": [
+      "parse_failed target=tokyo-20-6570 result=tokyo-20-6570:error title=\"シティコート二子玉川\" reason=\"Building room API failed with status 500.\" evidence=source=detail_bukken_room | pageIndex=0 | status=500 | shisya=20 | danchi=657 | shikibetu=0"
+    ],
+    "parseFailureIds": [
+      "tokyo-20-6570:error"
+    ]
   }
 }
