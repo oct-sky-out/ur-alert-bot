@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-04-28T19:23:22+09:00",
+  "runAt": "2026-05-05T08:56:29+09:00",
   "priceMode": "rent_plus_fee",
   "maxPriceYen": 160000,
   "discountFilter": {
@@ -11,11 +11,81 @@
   },
   "language": "ko",
   "matchedIds": [
+    "tokyo-20-2950:000010224",
     "tokyo-20-6771:008040101",
-    "tokyo-20-5360:000081203",
     "saitama-50-2530:000040501"
   ],
   "results": [
+    {
+      "id": "tokyo-20-3910:308100304",
+      "targetId": "tokyo-20-3910",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3910.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_3910_room.html?JKSS=308100304",
+      "title": "光が丘パークタウン いちょう通り八番街 3-8-10号棟304号室",
+      "buildingName": "光が丘パークタウン いちょう通り八番街",
+      "roomId": "308100304",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ光が丘",
+      "contactPhone": "03-5997-8051",
+      "rentYen": 178200,
+      "feeYen": 3600,
+      "totalPriceYen": 181800,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-05-05T08:56:29+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "3LDK | 3階 | 近居割 | 近居割WIDE"
+    },
+    {
+      "id": "tokyo-20-6410:000052410",
+      "targetId": "tokyo-20-6410",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6410.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_6410_room.html?JKSS=000052410",
+      "title": "晴海アイランド トリトンスクエアアーバンタワー 5号棟2410号室",
+      "buildingName": "晴海アイランド トリトンスクエアアーバンタワー",
+      "roomId": "000052410",
+      "discountSystems": [
+        "近居割"
+      ],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR晴海現地案内所",
+      "contactPhone": "03-5144-0161",
+      "rentYen": 209600,
+      "feeYen": 6500,
+      "totalPriceYen": 216100,
+      "isAvailable": true,
+      "isMatched": false,
+      "checkedAt": "2026-05-05T08:56:29+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "1LDK | 24階 | 近居割"
+    },
+    {
+      "id": "tokyo-20-2950:000010224",
+      "targetId": "tokyo-20-2950",
+      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950.html",
+      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_2950_room.html?JKSS=000010224",
+      "title": "金町第二 1号棟224号室",
+      "buildingName": "金町第二",
+      "roomId": "000010224",
+      "discountSystems": [],
+      "rentBasis": "listed_rent",
+      "priceInquiryRequired": false,
+      "contactName": "UR賃貸ショップ北千住",
+      "contactPhone": "03-5244-2877",
+      "rentYen": 103500,
+      "feeYen": 4400,
+      "totalPriceYen": 107900,
+      "isAvailable": true,
+      "isMatched": true,
+      "checkedAt": "2026-05-05T08:56:29+09:00",
+      "parseStatus": "ok",
+      "parseMessage": "2DK | 2階 | 健康寿命サポート"
+    },
     {
       "id": "tokyo-20-6771:008040101",
       "targetId": "tokyo-20-6771",
@@ -36,7 +106,7 @@
       "totalPriceYen": 150400,
       "isAvailable": true,
       "isMatched": true,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "3DK | 1階 | 近居割 | 近居割WIDE"
     },
@@ -60,7 +130,7 @@
       "totalPriceYen": 169900,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "1LDK | 5階 | 近居割 | 近居割WIDE"
     },
@@ -84,57 +154,9 @@
       "totalPriceYen": 170000,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "2LDK | 1階 | 近居割 | 近居割WIDE"
-    },
-    {
-      "id": "tokyo-20-5360:000081203",
-      "targetId": "tokyo-20-5360",
-      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5360.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5360_room.html?JKSS=000081203",
-      "title": "新川・島屋敷通り 8号棟1203号室",
-      "buildingName": "新川・島屋敷通り",
-      "roomId": "000081203",
-      "discountSystems": [
-        "近居割"
-      ],
-      "rentBasis": "listed_rent",
-      "priceInquiryRequired": false,
-      "contactName": "UR賃貸ショップ吉祥寺",
-      "contactPhone": "0422-71-2851",
-      "rentYen": 144200,
-      "feeYen": 5350,
-      "totalPriceYen": 149550,
-      "isAvailable": true,
-      "isMatched": true,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
-      "parseStatus": "ok",
-      "parseMessage": "3LDK | 12階 | 近居割 | 近居割WIDE"
-    },
-    {
-      "id": "tokyo-20-5970:000280703",
-      "targetId": "tokyo-20-5970",
-      "targetUrl": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5970.html",
-      "url": "https://www.ur-net.go.jp/chintai/kanto/tokyo/20_5970_room.html?JKSS=000280703",
-      "title": "サンヴァリエ桜堤 28号棟703号室",
-      "buildingName": "サンヴァリエ桜堤",
-      "roomId": "000280703",
-      "discountSystems": [
-        "近居割"
-      ],
-      "rentBasis": "listed_rent",
-      "priceInquiryRequired": false,
-      "contactName": "UR賃貸ショップ吉祥寺",
-      "contactPhone": "0422-71-2851",
-      "rentYen": 153600,
-      "feeYen": 7000,
-      "totalPriceYen": 160600,
-      "isAvailable": true,
-      "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
-      "parseStatus": "ok",
-      "parseMessage": "3DK | 7階 | 近居割 | 近居割WIDE"
     },
     {
       "id": "saitama-50-2530:000050503",
@@ -156,7 +178,7 @@
       "totalPriceYen": 102400,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 5階 | 子育て割"
     },
@@ -180,7 +202,7 @@
       "totalPriceYen": 107600,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 3階 | 子育て割"
     },
@@ -204,7 +226,7 @@
       "totalPriceYen": 114000,
       "isAvailable": true,
       "isMatched": false,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "3LDK | 4階 | 子育て割"
     },
@@ -228,13 +250,13 @@
       "totalPriceYen": 131200,
       "isAvailable": true,
       "isMatched": true,
-      "checkedAt": "2026-04-28T19:23:22+09:00",
+      "checkedAt": "2026-05-05T08:56:29+09:00",
       "parseStatus": "ok",
       "parseMessage": "4LDK | 5階 | 近居割"
     }
   ],
   "diagnostics": {
-    "totalResults": 9,
+    "totalResults": 10,
     "matchedCount": 3,
     "parseFailureCount": 0,
     "structureChangeSuspected": false,
