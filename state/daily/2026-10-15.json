@@ -1,4 +1,8 @@
 {
   "date": "2026-10-15",
-  "goneReportedIds": []
+  "goneReportedIds": [
+    "tokyo-20-1650:000010222",
+    "tokyo-20-6771:005061206",
+    "saitama-50-2530:000090303"
+  ]
 }
